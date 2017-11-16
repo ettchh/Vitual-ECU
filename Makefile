@@ -1,9 +1,9 @@
 .PHONY: all clean
 
 ROOTFS ?= linaro-trusty-developer-20140522-661.tar.gz
-ROOTFSURL ?= http://releases.linaro.org/14.05/ubuntu/trusty-images/developer/
-BOARD ?= cubieboard2
-# BOARD ?= cubietruck
+ROOTFSURL ?= http://releases.linaro.org/archive/14.05/ubuntu/trusty-images/developer/
+# BOARD ?= cubieboard2
+BOARD ?= cubietruck
 FIRMWARE ?= rtlwifi htc_9271.fw
 
 # files required to build the final image

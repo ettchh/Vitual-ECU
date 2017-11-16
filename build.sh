@@ -203,8 +203,9 @@ export OPAMROOT=${OPAM_ROOT}
 opam repo add mirage-xen-latest https://github.com/dornerworks/mirage-xen-latest-dev.git
 opam update
 status=1
+
 for i in {1..3}; do
-    timeout 600 opam pin add -y mirage 2.8.0
+    opam pin add -y mirage 2.8.0
     status=\$?
     if [ \$status -eq 0 ]; then
         echo "opam pin \$i success"
@@ -215,36 +216,6 @@ for i in {1..3}; do
         echo "opam command timed out \$i (\$status), retrying..."
     else
         echo "opam pin failure \$i (\$status), exiting!"
-        exit \$status
-    fi
-done
-for i in {1..3}; do
-    timeout 600 opam pin add -y mirage-bootvar-xen 0.3.1
-    status=\$?
-    if [ \$status -eq 0 ]; then
-        echo "opam pin \$i success"
-        break
-    elif [ \$status -eq 66 ]; then
-        echo "opam package download failure \$i (\$status), retrying..."
-    elif [ \$status -eq 124 ]; then
-        echo "opam command timed out \$i (\$status), retrying..."
-    else
-        echo "opam pin failure \$i (\$status), exiting!"
-        exit \$status
-    fi
-done
-for i in {1..3}; do
-    timeout 600 opam install -y depext vchan mirage-console mirage-xen
-    status=\$?
-    if [ \$status -eq 0 ]; then
-        echo "opam install \$i success"
-        break
-    elif [ \$status -eq 66 ]; then
-        echo "opam package download failure \$i (\$status), retrying..."
-    elif [ \$status -eq 124 ]; then
-        echo "opam command timed out \$i (\$status), retrying..."
-    else
-        echo "opam install failure \$i (\$status), exiting!"
         exit \$status
     fi
 done
